@@ -1,5 +1,5 @@
-import { ICreateEventRegistrationDTO } from "../dtos/ICreateEventRegistrationDTO";
-import { EventRegistration } from "../entities/EventRegistration";
+import { ICreateEventRegistrationDTO } from "./../dtos/ICreateEventRegistrationDTO";
+import { EventRegistration } from "./../entities/EventRegistration";
 import { IEventRegistrationRepository } from "./IEventRegistrationRepository";
 
 class EventRegistrationRepositoryInMemory implements IEventRegistrationRepository {
@@ -22,15 +22,11 @@ class EventRegistrationRepositoryInMemory implements IEventRegistrationRepositor
     return event;
   }
 
-  async findById(id: string): Promise<EventRegistration | undefined> {
+  async getEventById(id: string): Promise<EventRegistration | undefined> {
     return await this.events.find((event) => event.id === id);
   }
 
-  async getEvent(): Promise<EventRegistration> {
-    throw new Error("Method not implemented.");
-  }
-
-  async getEvents(): Promise<EventRegistration[]> {
+  async getAllEvents(): Promise<EventRegistration[]> {
     return this.events;
   }
 

@@ -11,8 +11,8 @@ class EventRegistration {
   constructor(description: string, dateTime: string, createdAt: string) {
     this.id = "";
     this.description = description;
-    this.dateTime = description;
-    this.createdAt = description;
+    this.dateTime = dateTime;
+    this.createdAt = createdAt;
 
     if (!this.id) {
       this.id = uuidV4();
