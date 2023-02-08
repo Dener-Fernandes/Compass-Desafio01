@@ -33,7 +33,7 @@ class EventRegistrationRepositoryInMemory implements IEventRegistrationRepositor
   async deleteById(id: string): Promise<EventRegistration> {
     const eventIndex = this.events.findIndex((event) => event.id === id);
     const [ eventRegistration ] = await this.events.splice(eventIndex, 1);
-
+    
     return eventRegistration;
   }
 
