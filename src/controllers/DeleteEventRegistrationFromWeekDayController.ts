@@ -19,7 +19,7 @@ class DeleteEventRegistrationFromWeekDayController {
 
       return res.status(200).json({ message: "Event deleted by Day" });
     } catch (error) {
-      return res.status(400).json({ message: "Could not delete event. Please, try later" });
+      return res.status(500).json({ message: "Could not delete event. Please, try later" });
     }
 
   }

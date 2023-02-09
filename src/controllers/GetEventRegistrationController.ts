@@ -11,7 +11,7 @@ class GetEventRegistrationController {
 
       return res.status(200).json({event: event});
     } catch (error) {
-      return res.status(400).json({ message: "Could not get event. Please, try later" });
+      return res.status(500).json({ message: "Could not get event. Please, try later" });
     }
   }
 }

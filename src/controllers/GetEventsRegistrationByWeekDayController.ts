@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { EventRegistrationRepositoryInMemory } from "../models/repositories/EventRegistrationRepositoryInMemory";
+import { EventRegistrationRepositoryInMemory } from "./../models/repositories/EventRegistrationRepositoryInMemory";
 
 class GetEventsRegistrationByWeekDayController {
   async handle(req: Request, res: Response) {
@@ -13,7 +13,7 @@ class GetEventsRegistrationByWeekDayController {
 
       return res.status(200).json({ eventsByWeekDay: events });
     } catch (error) {
-      return res.status(400).json({ message: "Could not get events. Please, try later" }); 
+      return res.status(500).json({ message: "Could not get events. Please, try later" }); 
     }
   }
 }
