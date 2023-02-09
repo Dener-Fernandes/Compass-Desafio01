@@ -9,7 +9,7 @@ class DeleteEventRegistrationController {
     // Removing blank space
     id = id.trim();
     if (!id) {
-      return res.status(400).json({ message: "Invalid request" });
+      return res.status(400).json({ message: "Missing id" });
     }
 
     try {

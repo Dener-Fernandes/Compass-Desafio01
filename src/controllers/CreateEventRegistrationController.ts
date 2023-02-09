@@ -6,6 +6,11 @@ class CreateEventRegistrationController {
     const { description, dateTime, createdAt } = req.body;
     const eventRegistrationRepositoryInMemory = EventRegistrationRepositoryInMemory.getInstance();
 
+    if (!description || !dateTime || !createdAt) { 
+      return res.status(400).json({ message: "Missing required fields" });      
+    }
+
+
     try {
       const event = await eventRegistrationRepositoryInMemory.create({description, dateTime, createdAt});
 

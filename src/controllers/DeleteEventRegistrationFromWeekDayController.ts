@@ -8,11 +8,11 @@ class DeleteEventRegistrationFromWeekDayController {
     const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
     if (!dayOfTheWeek) {
-      return res.status(400).json({ message: "Invalid request" });
+      return res.status(400).json({ message: "Missing day of the week" });
     }
 
     dayOfTheWeek = String(dayOfTheWeek);
-    
+
     try {
       let dayOfTheWeekInNumber = days.findIndex((day) => day === dayOfTheWeek);
       await eventRegistrationRepositoryInMemory.deleteFromWeekDay(dayOfTheWeekInNumber);

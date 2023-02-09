@@ -9,7 +9,7 @@ class GetEventRegistrationController {
     try {
       const event = await eventRegistrationRepositoryInMemory.getEventById(id);
 
-      return res.status(200).json(event);
+      return res.status(200).json({event: event});
     } catch (error) {
       return res.status(400).json({ message: "Could not get event. Please, try later" });
     }
