@@ -11,7 +11,7 @@ class CreateEventRegistrationController {
 
       return res.status(201).json({ event });
     } catch (error) {
-      return res.status(400).json({ message: "Could not create an event. Please, try later" });
+      return res.status(400).json({ message: "Could not create event. Please, try later" });
     }
   }
 }

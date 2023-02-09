@@ -3,7 +3,6 @@ import { EventRegistration } from "./../entities/EventRegistration";
 import { IEventRegistrationRepository } from "./IEventRegistrationRepository";
 
 class EventRegistrationRepositoryInMemory implements IEventRegistrationRepository {
-
   private static INSTANCE: EventRegistrationRepositoryInMemory;
   private events: EventRegistration[] = [];
 
@@ -26,26 +25,39 @@ class EventRegistrationRepositoryInMemory implements IEventRegistrationRepositor
     return await this.events.find((event) => event.id === id);
   }
 
+  async getEventsByWeekDay(dayOfTheWeek: number): Promise<EventRegistration[]> {
+    const eventsByWeekDay = await this.events.filter((event) => {
+      const date = new Date(event.dateTime);
+      if (date.getDay() === dayOfTheWeek) {
+        return event;
+      }
+    });
+
+    return eventsByWeekDay;
+  }
+
   async getAllEvents(): Promise<EventRegistration[]> {
     return this.events;
   }
 
-  async deleteById(id: string): Promise<EventRegistration> {
+  async deleteById(id: string): Promise<void> {
     const eventIndex = this.events.findIndex((event) => event.id === id);
-    const [ eventRegistration ] = await this.events.splice(eventIndex, 1);
+    await this.events.splice(eventIndex, 1);
     
-    return eventRegistration;
+    return;
   }
 
-  async deleteFromWeekDay(dayOfTheWeek: number): Promise<EventRegistration> {
-    const eventIndex = this.events.findIndex((event) => {
+  async deleteFromWeekDay(dayOfTheWeek: number): Promise<void> {
+    const newEvents: EventRegistration[] = await this.events.filter((event) => {
       const date = new Date(event.dateTime);
-      return date.getDay() === dayOfTheWeek;
+      if (date.getDay() != dayOfTheWeek) {
+        return event;
+      } 
     });
 
-    const [ eventRegistration ] = await this.events.splice(eventIndex, 1);
+    this.events = newEvents;
     
-    return eventRegistration;
+    return;
   }
 }
 

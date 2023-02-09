@@ -3,15 +3,21 @@ import { EventRegistrationRepositoryInMemory } from "./../models/repositories/Ev
 
 class DeleteEventRegistrationController {
   async handle(req: Request, res: Response): Promise<Response> {
-    const { id } = req.params;
+    let { id } = req.params;
     const eventRegistrationRepositoryInMemory = EventRegistrationRepositoryInMemory.getInstance();
 
+    // Removing blank space
+    id = id.trim();
+    if (!id) {
+      return res.status(400).json({ message: "Invalid request" });
+    }
+
     try {
-      const event = await eventRegistrationRepositoryInMemory.deleteById(id);
+      await eventRegistrationRepositoryInMemory.deleteById(id);
       
-      return res.status(200).json({ deletedEvent: event });
+      return res.status(200).json({ message: "Event deleted by Id" });
     } catch(error) {
-      return res.status(400).json({ message: "Could not delete the event. Please, try later" });
+      return res.status(400).json({ message: "Could not delete event. Please, try later" });
     }
   }
 }
