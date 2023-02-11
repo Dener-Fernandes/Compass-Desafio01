@@ -1,5 +1,5 @@
-import { ISignUpDTO } from "../dtos/ISignUpDTO"
-import { User } from "../entities/User"
+import { ISignUpDTO } from "./../dtos/ISignUpDTO"
+import { User } from "./../entities/User"
 
 interface IUserRepositoryInMemory {
   signUp(ISignUpDTO: ISignUpDTO): Promise<User>,

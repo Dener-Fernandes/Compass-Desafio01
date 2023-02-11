@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { EventRegistrationRepositoryInMemory } from "../models/repositories/EventRegistrationRepositoryInMemory";
+import { EventRegistrationRepositoryInMemory } from "./../models/repositories/EventRegistrationRepositoryInMemory";
 
 class GetAllEventsRegistrationController {
   async handle(req: Request, res: Response): Promise<Response> {

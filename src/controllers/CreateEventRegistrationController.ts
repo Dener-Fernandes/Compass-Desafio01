@@ -1,17 +1,19 @@
 import { Request, Response } from "express";
 import { EventRegistrationRepositoryInMemory } from "./../models/repositories/EventRegistrationRepositoryInMemory";
 
+interface IRequest {
+  description: string;
+  dateTime: string;
+  createdAt: string;
+}
+
 class CreateEventRegistrationController {
   async handle(req: Request, res: Response): Promise<Response> {
-    const { description, dateTime, createdAt } = req.body;
+    const requestValues: IRequest = req.body;
     const eventRegistrationRepositoryInMemory = EventRegistrationRepositoryInMemory.getInstance();
 
-    if (!description || !dateTime || !createdAt) { 
-      return res.status(400).json({ message: "Missing required fields" });      
-    }
-
     try {
-      const event = await eventRegistrationRepositoryInMemory.create({ description, dateTime, createdAt });
+      const event = await eventRegistrationRepositoryInMemory.create(requestValues);
 
       return res.status(201).json({ event });
     } catch (error) {
