@@ -150,7 +150,7 @@ and also sign up and sign in. This application is developed with NodeJS, Javascr
   (UserRepositoryInMemory). In the repository, an instance of the class User is created and the values received 
   from the controller are set to it, then the instance is pushed into an array. In the end, the instance created 
   is returned to the controller, that will return it as response. If an error occurs during this process, an error 
-  message will be sent back warning that was not possible to sign up..
+  message will be sent back warning that was not possible to sign up.
 </p>
 
 <p>
