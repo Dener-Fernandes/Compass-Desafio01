@@ -28,8 +28,8 @@ and also sign up and sign in. This application is developed with NodeJS, Javascr
     <li>Create event</li>
     <li>Delete event</li>
     <li>Delete event from day of the week</li>
-    <li>Get events</li>
     <li>Get event</li>
+    <li>Get events</li>
     <li>Get event from day of the week</li>
     <li>Sign Up</li>
     <li>Sign In</li>
@@ -65,18 +65,18 @@ and also sign up and sign in. This application is developed with NodeJS, Javascr
   localhost:3000/api/v1/events?dayOfTheWeek=Friday</br>
 </p>
 <p>
-  <h3>Get events</h3>
-  <p>Route: localhost:3000/api/v1/events</p>
-  To get the list of events, you need to send a request to the route above. This request does not need a body or 
-  params.
-</p>
-<p>
   <h3>Get event</h3>
   <p>Route: localhost:3000/api/v1/events/:id</p>
   To get an event you need to send a request to the route above. The request route must contain the id of the 
   event that you want to get. It needs to be provided as a route param. The id needs to be a string and an uuid 
   (universally unique identifier). Here is an example:</br>
   localhost:3000/api/v1/events/e0720442-70b1-4c28-bf47-685d2e30cb97</br>
+</p>
+<p>
+  <h3>Get events</h3>
+  <p>Route: localhost:3000/api/v1/events</p>
+  To get the list of events, you need to send a request to the route above. This request does not need a body or 
+  params.
 </p>
 <p>
   <h3>Get event by day of the week</h3>
