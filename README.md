@@ -144,7 +144,7 @@ and also sign up and sign in. This application is developed with NodeJS, Javascr
     "confirmPassword": "12345" </br>
   } </br></br>
 
-  This request will be validated by a middleware (validateSignUp), and if the request is not valid, an error message
+  This request will be validated by a middleware (validateSignUpRequest), and if the request is not valid, an error message
   will be sent back as response. On the other hand, if the request is valid, it will be sent to the controller 
   (SignUpController), that will get the values from the request and send them to the user's repository 
   (UserRepositoryInMemory). In the repository, an instance of the class User is created and the values received 
