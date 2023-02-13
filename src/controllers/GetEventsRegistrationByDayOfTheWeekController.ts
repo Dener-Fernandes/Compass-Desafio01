@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import Joi, { ValidationError } from "joi";
 import { EventRegistrationRepositoryInMemory } from "./../models/repositories/EventRegistrationRepositoryInMemory";
 
+/* Due to how the route of this controller was implemented, it was necessary to validate the dayOfTheWeek here. */
 const requestValidation = Joi.string().required();
 const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
