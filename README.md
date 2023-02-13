@@ -2,6 +2,12 @@
 <p>This is the first challenge offered by Compass to test the NodeJS development intership's members. It is a planner that users can create, read and delete events,
 and also sign up and sign in. This application is developed with NodeJS, Javascript and Typescript.</p>
 
+<h3>Production mode</h3>
+<p>URL to application in production mode: https://compass-desafio01-production.up.railway.app/</p>
+<p>It is possible to test this application in production mode. You need to use the URL above, but the paths to send requests are the same of development mode.
+Follow the steps bellow to test it, but use the production URL.
+</p>
+
 <h3>Requirements</h3>
 <p>To run this project in you computer you need to have installed NodeJS, npm, some IDE and Postman. You may need
   Git to clone the project, however you can download it as a zip archive.
@@ -25,20 +31,19 @@ and also sign up and sign in. This application is developed with NodeJS, Javascr
 
 <h4>
   <ul>
-    <li>Create event</li>
-    <li>Delete event</li>
-    <li>Delete event from day of the week</li>
-    <li>Get event</li>
-    <li>Get events</li>
-    <li>Get event from day of the week</li>
-    <li>Sign Up</li>
-    <li>Sign In</li>
+    <li><a href="#createEvent">Create event</a></li>
+    <li><a href="#deleteEvent">Delete event</a></li>
+    <li><a href="#deleteEventByDayOfTheWeek">Delete event by day of the week</a></li>
+    <li><a href="#getEvent">Get event</a></li>
+    <li><a href="#getEvents">Get events</a></li>
+    <li><a href="#getEventByDayOfTheWeek">Get event by day of the week</a></li>
+    <li><a href="#signUp">Sign up</a></li>
+    <li><a href="#signIn">Sign in</a></li>
    </ul>
 </h4>
 
-<p>
-
-<h3>Create event:</h3>
+<p id="createEvent">
+  <h3>Create event:</h3>
   <p>Route type: POST</p>
   <p>Route: localhost:3000/api/v1/events</p>
   To create an event you need to send a request to the route above. The request body needs to contain the following
@@ -49,7 +54,8 @@ and also sign up and sign in. This application is developed with NodeJS, Javascr
     "createdAt": "2023-02-10T13:52:31.775Z" </br>
   } </br>
 </p>
-<p>
+
+<p id="deleteEvent">
   <h3>Delete event</h3>
   <p>Route type: DELETE</p>
   <p>Route: localhost:3000/api/v1/event/:id</p>
@@ -58,7 +64,8 @@ and also sign up and sign in. This application is developed with NodeJS, Javascr
   (universally unique identifier). Here is an example:</br>
   localhost:3000/api/v1/event/e0720442-70b1-4c28-bf47-685d2e30cb97</br>
 </p>
-<p>
+
+<p id="deleteEventByDayOfTheWeek">
   <h3>Delete event by day of the week</h3>
   <p>Route type: DELETE</p>
   <p>Route: localhost:3000/api/v1/events?dayOfTheWeek</p>
@@ -67,7 +74,8 @@ and also sign up and sign in. This application is developed with NodeJS, Javascr
   the week needs to be a string (Sunday, Monday, Tuesday, Wednesday, Friday, Saturday). Here is an example:</br>
   localhost:3000/api/v1/events?dayOfTheWeek=Friday</br>
 </p>
-<p>
+
+<p id="getEvent">
   <h3>Get event</h3>
   <p>Route type: GET</p>
   <p>Route: localhost:3000/api/v1/events/:id</p>
@@ -76,14 +84,16 @@ and also sign up and sign in. This application is developed with NodeJS, Javascr
   (universally unique identifier). Here is an example:</br>
   localhost:3000/api/v1/events/e0720442-70b1-4c28-bf47-685d2e30cb97</br>
 </p>
-<p>
+
+<p id="getEvents">
   <h3>Get events</h3>
   <p>Route type: GET</p>
   <p>Route: localhost:3000/api/v1/events</p>
   To get the list of events, you need to send a request to the route above. This request does not need a body or 
   params.
 </p>
-<p>
+
+<p id="getEventByDayOfTheWeek">
   <h3>Get event by day of the week</h3>
   <p>Route type: GET</p>
   <p>Route: localhost:3000/api/v1/events?dayOfTheWeek</p>
@@ -92,7 +102,8 @@ and also sign up and sign in. This application is developed with NodeJS, Javascr
   the week needs to be a string (Sunday, Monday, Tuesday, Wednesday, Friday, Saturday). Here is an example:</br>
   localhost:3000/api/v1/events?dayOfTheWeek=Friday</br>
 </p>
-<p>
+
+<p id="signUp">
   <h3>Sign Up</h3>
   <p>Route type: POST</p>
   <p>Route: localhost:3000/api/v1/users/signUp</p>
@@ -111,7 +122,7 @@ and also sign up and sign in. This application is developed with NodeJS, Javascr
   } </br>
 </p>
 
-<p>
+<p id="signIn">
   <h3>Sign In</h3>
   <p>Route type: POST</p>
   <p>Route: localhost:3000/api/v1/users/signIn</p>
