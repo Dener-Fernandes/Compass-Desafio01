@@ -39,6 +39,7 @@ and also sign up and sign in. This application is developed with NodeJS, Javascr
 <p>
 
 <h3>Create event:</h3>
+  <p>Route type: POST</p>
   <p>Route: localhost:3000/api/v1/events</p>
   To create an event you need to send a request to the route above. The request body needs to contain the following
   fields: description, dateTime, createdAt. All of them need to be of type string. Here is an example:</br>
@@ -50,6 +51,7 @@ and also sign up and sign in. This application is developed with NodeJS, Javascr
 </p>
 <p>
   <h3>Delete event</h3>
+  <p>Route type: DELETE</p>
   <p>Route: localhost:3000/api/v1/event/:id</p>
   To delete an event you need to send a request to the route above. The request route must contain the id of the 
   event that you want to delete. It needs to be provided as a route param. The id needs to be a string and an uuid 
@@ -58,6 +60,7 @@ and also sign up and sign in. This application is developed with NodeJS, Javascr
 </p>
 <p>
   <h3>Delete event by day of the week</h3>
+  <p>Route type: DELETE</p>
   <p>Route: localhost:3000/api/v1/events?dayOfTheWeek</p>
   To delete an event by day of the week you need to send a request to the route above. The request route must contain
   the day of the week that you want to delete the event from. It needs to be provided as a query param. The day of 
@@ -66,6 +69,7 @@ and also sign up and sign in. This application is developed with NodeJS, Javascr
 </p>
 <p>
   <h3>Get event</h3>
+  <p>Route type: GET</p>
   <p>Route: localhost:3000/api/v1/events/:id</p>
   To get an event you need to send a request to the route above. The request route must contain the id of the 
   event that you want to get. It needs to be provided as a route param. The id needs to be a string and an uuid 
@@ -74,12 +78,14 @@ and also sign up and sign in. This application is developed with NodeJS, Javascr
 </p>
 <p>
   <h3>Get events</h3>
+  <p>Route type: GET</p>
   <p>Route: localhost:3000/api/v1/events</p>
   To get the list of events, you need to send a request to the route above. This request does not need a body or 
   params.
 </p>
 <p>
   <h3>Get event by day of the week</h3>
+  <p>Route type: GET</p>
   <p>Route: localhost:3000/api/v1/events?dayOfTheWeek</p>
   To get an event by day of the week, you need to send a request to the route above. The request route must contain
   the day of the week that you want to get the event from. It needs to be provided as a query param. The day of 
@@ -88,24 +94,26 @@ and also sign up and sign in. This application is developed with NodeJS, Javascr
 </p>
 <p>
   <h3>Sign Up</h3>
+  <p>Route type: POST</p>
   <p>Route: localhost:3000/api/v1/users/signUp</p>
   To sign up, you need to send a request to the route above. The request must contain the following fields: firstName,
   lastName, birthDate, city, country, email, password, confirmPassword. They have to be of type string. Here is an 
   example:</br>
   { </br>
-    "firstName": "Dener" </br> 
-    "lastName":"Oliveira" </br> 
-    "birthDate": "2023-01-01" </br>
-    "city": "Golden City" </br>
-    "country": "Brazil" </br> 
-    "email": "dener@gmail.com" </br>
-    "password": "12345" </br> 
+    "firstName": "Dener", </br> 
+    "lastName":"Oliveira", </br> 
+    "birthDate": "2023-01-01", </br>
+    "city": "Golden City", </br>
+    "country": "Brazil", </br> 
+    "email": "dener@gmail.com", </br>
+    "password": "12345", </br> 
     "confirmPassword": "12345" </br>
   } </br>
 </p>
 
 <p>
   <h3>Sign In</h3>
+  <p>Route type: POST</p>
   <p>Route: localhost:3000/api/v1/users/signIn</p>
   To sign in, you need to send a request to the route above. The request must contain the following fields: email and
   password. They need to be of type string. Here is an example:</br>
