@@ -7,7 +7,7 @@ const requestValidation = Joi.object({
 });
 
 
-async function validateSignInRequest (req: Request, res: Response, next: NextFunction) {
+async function validateSignInRequest (req: Request, res: Response, next: NextFunction): Promise<void | Response> {
   try {
     await requestValidation.validateAsync(req.body);
     

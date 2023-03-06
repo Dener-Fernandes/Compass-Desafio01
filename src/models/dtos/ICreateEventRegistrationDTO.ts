@@ -1,7 +1,6 @@
 interface ICreateEventRegistrationDTO {
   description: string;
-  dateTime: string;
-  createdAt: string;
+  dateTime: Date;
 }
 
 export { ICreateEventRegistrationDTO }

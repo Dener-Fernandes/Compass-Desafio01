@@ -1,10 +1,12 @@
+import { HydratedDocument } from "mongoose";
 import { ICreateEventRegistrationDTO } from "./../dtos/ICreateEventRegistrationDTO";
 import { EventRegistration } from "./../entities/EventRegistration";
 import { IEventRegistrationRepository } from "./IEventRegistrationRepository";
 
+interface IEventRegistration extends ICreateEventRegistrationDTO {};
+
 class EventRegistrationRepositoryInMemory implements IEventRegistrationRepository {
   private static INSTANCE: EventRegistrationRepositoryInMemory;
-  private events: EventRegistration[] = [];
 
   static getInstance() {
     if (!EventRegistrationRepositoryInMemory.INSTANCE) {
@@ -14,19 +16,21 @@ class EventRegistrationRepositoryInMemory implements IEventRegistrationRepositor
     return EventRegistrationRepositoryInMemory.INSTANCE;
   }
 
-  async create({ description, dateTime, createdAt }: ICreateEventRegistrationDTO): Promise<EventRegistration> {
-    const event = new EventRegistration(description, dateTime, createdAt);
-    await this.events.push(event);
+  async create({ description, dateTime }: ICreateEventRegistrationDTO): Promise<HydratedDocument<IEventRegistration>> {
+    const event = await EventRegistration.create({ description, dateTime});
 
     return event;
   }
 
-  async getEventById(id: string): Promise<EventRegistration | undefined> {
-    return await this.events.find((event) => event.id === id);
+  async getEventById(id: string): Promise<HydratedDocument<IEventRegistration> | null> {
+    const event = await EventRegistration.findById(id);
+
+    return event;
   }
 
-  async getEventsByWeekDay(dayOfTheWeek: number): Promise<EventRegistration[]> {
-    const eventsByWeekDay = await this.events.filter((event) => {
+  async getEventsByWeekDay(dayOfTheWeek: number): Promise<HydratedDocument<IEventRegistration>[]> {
+    const events = await EventRegistration.find();
+    const eventsByWeekDay = events.filter((event) => {
       const date = new Date(event.dateTime);
       if (date.getDay() === dayOfTheWeek) {
         return event;
@@ -36,27 +40,27 @@ class EventRegistrationRepositoryInMemory implements IEventRegistrationRepositor
     return eventsByWeekDay;
   }
 
-  async getAllEvents(): Promise<EventRegistration[]> {
-    return this.events;
+  async getAllEvents(): Promise<HydratedDocument<IEventRegistration>[]> {
+    const events = await EventRegistration.find();
+
+    return events;
   }
 
   async deleteById(id: string): Promise<void> {
-    const eventIndex = await this.events.findIndex((event) => event.id === id);
-    this.events.splice(eventIndex, 1);
+    await EventRegistration.deleteOne({ _id: id });
     
     return;
   }
 
   async deleteFromWeekDay(dayOfTheWeek: number): Promise<void> {
-    const newEvents: EventRegistration[] = await this.events.filter((event) => {
+    const events = await EventRegistration.find();
+    events.filter(async (event: HydratedDocument<IEventRegistration>) => {
       const date = new Date(event.dateTime);
-      if (date.getDay() != dayOfTheWeek) {
-        return event;
-      } 
+      if (date.getDay() === dayOfTheWeek) {
+        await EventRegistration.deleteOne(event._id);
+      }
     });
-
-    this.events = newEvents;
-    
+       
     return;
   }
 }

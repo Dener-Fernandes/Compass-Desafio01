@@ -4,7 +4,7 @@ import Joi, { ValidationError } from "joi";
 const requestValidation = Joi.object({
   firstName: Joi.string().required(), 
   lastName: Joi.string().required(),
-  birthDate: Joi.string().required(), 
+  birthDate: Joi.required(), 
   city: Joi.string().required(), 
   country: Joi.string().required(), 
   email: Joi.string().email().required(), 
@@ -12,7 +12,7 @@ const requestValidation = Joi.object({
   confirmPassword: Joi.string().valid(Joi.ref("password")).required() 
 });
 
-async function validateSignUpRequest(req: Request, res: Response, next: NextFunction) {
+async function validateSignUpRequest(req: Request, res: Response, next: NextFunction): Promise<void | Response> {
   try {
     await requestValidation.validateAsync(req.body);
 

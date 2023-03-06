@@ -10,7 +10,7 @@ import { validateSignUpRequest } from "../validators/validateSignUpRequest";
 const signUpController = new SignUpController();
 const signInController = new SignInController();
 
-userRoutes.post("/signUp", validateSignUpRequest, signUpController.handle);
+userRoutes.post("/signUp",  signUpController.handle);
 userRoutes.post("/signIn", validateSignInRequest, signInController.handle);
 
 export { userRoutes }

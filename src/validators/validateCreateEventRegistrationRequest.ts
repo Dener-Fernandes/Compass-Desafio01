@@ -1,22 +1,17 @@
 import { Request, Response, NextFunction } from "express";
 import Joi, { ValidationError } from "joi";
+import { AppError } from "./../errors/AppError";
 
 const requestValidation = Joi.object({
-  description: Joi.string().required(),
-  dateTime: Joi.string().regex(/^[A-Z0-9:.-]*$/).required(),
-  createdAt: Joi.string().regex(/^[A-Z0-9:.-]*$/).required()
+  description: Joi.string().required().messages({ "string.required": "Description is required" }),
+  dateTime: Joi.date().required().messages({ "date.base": "Date time must be a valid date" }),
 });
 
-async function validateCreateEventRegistrationRequest(req: Request, res: Response, next: NextFunction) { 
-  try {
-    await requestValidation.validateAsync(req.body);
-    
-    return next();
-  } catch (error) {
-    const errorsValidation = error as ValidationError
+async function validateCreateEventRegistrationRequest(req: Request, res: Response, next: NextFunction): Promise<void | Response> { 
+  
+  await requestValidation.validateAsync(req.body);
 
-    return res.status(400).json({ message: errorsValidation.message });
-  }
+  return next();
 }
 
 export { validateCreateEventRegistrationRequest }

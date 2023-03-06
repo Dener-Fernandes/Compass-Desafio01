@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import { AppError } from "./../errors/AppError";
 import { UserRepositoryInMemory } from "./../models/repositories/UserRepositoryInMemory";
 
 interface IRequest {
@@ -11,21 +12,16 @@ class SignInController {
     const { email, password }: IRequest = req.body;
     const userRepositoryInMemory = UserRepositoryInMemory.getInstance();
 
-    try {
-      const user = await userRepositoryInMemory.findUserByEmail(email);
-      if (!user) {
-        return res.status(404).json({ message: "User not found" });
-      } else {
-        if (user.password !== password) {
-          return res.status(401).json({ message: "Email or password does not match" });
-        }
+    const user = await userRepositoryInMemory.findUserByEmail(email);
+    if (!user) {
+      throw new AppError("User not found", 404);
+    } else {
+      if (user.password !== password) {
+        throw new AppError("Email or password does not match", 401);
       }
-
-      return res.status(200).json({ message: "User signed in" });
-    }
-     catch (error) {
-      return res.status(500).json({ message: "Could not signIn. Please try later" }); 
-    }
+    } 
+       
+    return res.status(200).json({ message: "User signed in" });
   }
 }
 

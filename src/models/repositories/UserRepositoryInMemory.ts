@@ -1,10 +1,12 @@
+import { HydratedDocument } from "mongoose";
 import { ISignUpDTO } from "./../dtos/ISignUpDTO";
 import { User } from "./../entities/User";
 import { IUserRepositoryInMemory } from "./IUserRepositoryInMemory";
 
+interface IUser extends ISignUpDTO {};
+
 class UserRepositoryInMemory implements IUserRepositoryInMemory {
   private static INSTANCE: UserRepositoryInMemory;
-  private users: User[] = [];
 
   static getInstance() {
     if (!UserRepositoryInMemory.INSTANCE) {
@@ -23,8 +25,8 @@ class UserRepositoryInMemory implements IUserRepositoryInMemory {
     email, 
     password, 
     confirmPassword
-  }: ISignUpDTO): Promise<User> {
-    const user = new User(
+  }: ISignUpDTO): Promise<HydratedDocument<IUser>> {
+    const user: HydratedDocument<IUser> = await User.create({
       firstName, 
       lastName, 
       birthDate, 
@@ -33,15 +35,13 @@ class UserRepositoryInMemory implements IUserRepositoryInMemory {
       email, 
       password, 
       confirmPassword
-    );
+    });
     
-    await this.users.push(user);
-
     return user;
   }
 
-  async findUserByEmail(email: string): Promise<User | undefined> {
-    const user = await this.users.find((user) => user.email === email);
+  async findUserByEmail(email: string): Promise<HydratedDocument<IUser> | null> {
+    const user = await User.findOne({ email: email });
 
     return user;
   }
